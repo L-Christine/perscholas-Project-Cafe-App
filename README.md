@@ -2,6 +2,15 @@
 
 Clone this repo to provide the starter code for a comprehensive MERN-Stack project including token-based authentication.
 
+1. Clone the mern-infrastructure repo: git clone [url of mern-infrastructure] [name-of-project]
+2. cd [name-of-project]
+3. Create a .env (touch .env) and add entries for DATABASE_URL and SECRET
+4. Update the "name": "mern-infrastructure"in package.json to the name of your project
+5. Create a new repo on your personal GH account
+6. Copy the new GH repo's URL
+7. Update the remote's URL: git remote set-url origin [paste the copied GH url]
+8. Push for the first time: git push -u origin main
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
