@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { signUp } from '../utilities/users-service'
+import { signUp } from '../../utilities/users-service'
 //Flow: SignUpForm.jsx <--> users-service.js <--> users-api.js <-Internet-> server.js (Express)
 
 export default class SignUpForm extends Component {
