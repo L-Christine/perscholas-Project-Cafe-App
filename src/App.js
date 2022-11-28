@@ -1,29 +1,28 @@
-import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import { getUser } from './utilities/users-service'
-import AuthPage from './pages/AuthPage';
-import MainPage from './pages/MainPage';
-import NavBar from './components/NavBar';
-import './App.css';
+import React, { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import styles from './App.module.css';
+import { getUser } from '../../utilities/users-service';
+import AuthPage from '../AuthPage/AuthPage';
+import NewOrderPage from '../NewOrderPage/NewOrderPage';
+import OrderHistoryPage from '../OrderHistoryPage/OrderHistoryPage';
 
-function App() {
-  //state to hold the user data. null == not logged in
-  const [user, setUser] = useState(getUser())
-
+export default function App() {
+  const [user, setUser] = useState(getUser());
   return (
-    <div className="App">
-      {/* when user is logged in, show NavBar, if not, show AuthPage */}
-      {user ? (
-      <>
-      <NavBar user={user} setUser={setUser}/>
-      <Routes>
-        <Route path='/main' element={<MainPage />} />
-      </Routes> 
-      </>
-      ): (<AuthPage setUser={setUser}/>)
+    <main className={styles.App}>
+      { user ?
+        <>
+          <Routes>
+            {/* client-side route that renders the component instance if the path matches the url in the address bar */}
+            <Route path="/orders/new" element={<NewOrderPage user={user} setUser={setUser} />} />
+            <Route path="/orders" element={<OrderHistoryPage user={user} setUser={setUser} />} />
+            {/* redirect to /orders/new if path in address bar hasn't matched a <Route> above */}
+            <Route path="/*" element={<Navigate to="/orders/new" />} />
+          </Routes>
+        </>
+        :
+        <AuthPage setUser={setUser} />
       }
-    </div>
+    </main>
   );
 }
-
-export default App;
